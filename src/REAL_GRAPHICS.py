@@ -50,24 +50,28 @@ class EmotionsList(tk.Frame):
     """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.controller = controller
+        # self.controller = controller
         i = 0
+
+        #"""
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.grid(row=3, column=0)
+
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.grid(row=3, column=1)
+
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.grid(row=3, column=2)
+
         while i < len(emotions_list):
             label = tk.Label(self, text=emotions_list[i], font=controller.title_font).grid(row = 0, column=i)
             button = tk.Button(self, text="Define", command=self.change_current_emotion(controller, i)).grid(row = 1, column = i)
             i += 1
 
-        rec = Canvas(controller)
-        rec.create_rectangle(0, 0, 50, 50, fill="blue")
-        rec.pack()
-
-        rec = Canvas(controller)
-        rec.create_rectangle(0, 0, 50, 50, fill="blue")
-        rec.pack()
-
-        rec = Canvas(controller)
-        rec.create_rectangle(0, 0, 50, 50, fill="blue")
-        rec.pack()
+        #"""
 
         """
         # BUTTONS
