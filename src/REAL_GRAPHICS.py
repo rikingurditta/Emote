@@ -64,8 +64,23 @@ class EmotionsList(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text=emotions_list, font=controller.title_font)
-        label.pack(side="top", fill="x", pady=10)
+        i = 0
+        while i < len(emotions_list):
+            label = tk.Label(self, text=emotions_list[i], font=controller.title_font).grid(row = 0, column=i)
+            button = tk.Button(self, text="Define", command=self.change_current_emotion(controller, i)).grid(row = 1, column = i)
+            i += 1
+
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.pack()
+
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.pack()
+
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.pack()
 
         # BUTTONS
         buttons = []
@@ -89,7 +104,6 @@ class EmotionsList(tk.Frame):
                    height=canvas_height)
         w.pack()
         w.create_rectangle(0, 0, 50, 50, fill="blue")
-
         mainloop()
 """
 
@@ -106,7 +120,7 @@ class DefinitionsPage(tk.Frame):
 
         # Display Definition
         emotion = "contempt"
-        emotion_def = emotional_meaning[emotion]
+        emotion_def = "hi"
         label = tk.Label(self, text=emotion_def)
         label.pack(side="top", fill="x", pady=20)
 
