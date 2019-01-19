@@ -50,9 +50,25 @@ class EmotionsList(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text=emotions_list, font=controller.title_font)
-        label.pack(side="top", fill="x", pady=10)
+        i = 0
+        while i < len(emotions_list):
+            label = tk.Label(self, text=emotions_list[i], font=controller.title_font).grid(row = 0, column=i)
+            button = tk.Button(self, text="Define", command=self.change_current_emotion(controller, i)).grid(row = 1, column = i)
+            i += 1
 
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.pack()
+
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.pack()
+
+        rec = Canvas(controller)
+        rec.create_rectangle(0, 0, 50, 50, fill="blue")
+        rec.pack()
+
+        """
         # BUTTONS
         button0 = tk.Button(self, text="Definition0", command=self.change_current_emotion0(controller))
         button0.pack()
@@ -60,18 +76,11 @@ class EmotionsList(tk.Frame):
         button1.pack()
         button2 = tk.Button(self, text="Definition2", command=self.change_current_emotion2(controller))
         button2.pack()
+        """
 
-    def change_current_emotion0(self, controller):
+    def change_current_emotion(self, controller, i):
         self.controller = controller
         check_def_for.set(emotions_list[0])
-
-    def change_current_emotion1(self, controller):
-        self.controller = controller
-        check_def_for.set(emotions_list[1])
-
-    def change_current_emotion2(self, controller):
-        self.controller = controller
-        check_def_for.set(emotions_list[2])
 
         # MAKING RECTANGLES
 """
@@ -82,24 +91,23 @@ class EmotionsList(tk.Frame):
                    height=canvas_height)
         w.pack()
         w.create_rectangle(0, 0, 50, 50, fill="blue")
-
         mainloop()
 """
 
 
 class DefinitionsPage(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text=emotions_list, font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
         button = tk.Button(self, text="Back",
-                           command=lambda: controller.show_frame("EmotionsList"))
+                           command=lambda: controller.show_frame(
+                               "EmotionsList"))
 
         # Display Definition
         emotion = "contempt"
-        emotion_def = emotional_meaning[emotion]
+        emotion_def = "hi"
         label = tk.Label(self, text=emotion_def)
         label.pack(side="top", fill="x", pady=20)
 
@@ -109,14 +117,11 @@ class DefinitionsPage(tk.Frame):
     def display_def(self, emotion: str):
         """ Based on data given by _____ display the definitions corresponding to
         the emotion
-
         """
         emotion_def = emotional_meaning[emotion]
         label = tk.Label(self, text=emotion_def)
         label.pack(side="bottom", fill="x", pady=20)
         pass
-
-
 
 if __name__ == "__main__":
     app = Emotions()
