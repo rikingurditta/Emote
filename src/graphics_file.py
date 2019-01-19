@@ -33,6 +33,6 @@ label1.pack()
 label2 = Label(root, textvariable=emotion_desc)
 label2.pack()
 
-
+my_gui = EmotionDetector(root)
 root.mainloop()
 
