@@ -1,37 +1,38 @@
 from tkinter import Tk, Label, StringVar, IntVar, Button
-
 root = Tk()
 
-text = StringVar()
-text.set('Emotion')
+# STRINGS DEFINED HERE!
+
+emotion = StringVar()
+emotion.set('Happy')
+status = IntVar()
+
+emotion_desc = StringVar()
+emotion_desc.set('')
 status = IntVar()
 
 class EmotionDetector:
     def __init__(self, master):
         self.master = master
         master.title("Emotion Detector")
-
-        #self.label = Label(master, text="Emotions go here")
-        #self.label.pack()
-
+        
+        # BUTTONS ARE DEFINED HERE
         self.expand_button = Button(master, text="Expand", command=self.change, anchor="nw", justify="right", padx=2, bg = "blue")
         self.expand_button.pack()
 
-        self.close_button = Button(master, text="Dismiss", command=master.quit)
-        self.close_button.pack()
-
+    # THIS FUNCTION CHANGES THE TEXT
     def change(self):
-        if text.get() == 'IT WORKED!':
-            text.set('Again')
+        if emotion.get() == 'Happy':
+            emotion_desc.set('A good feeling')
         else:
-            text.set('IT WORKED!')
+            emotion_desc.set('Its not happy.')
 
+# THESE LINES ADD THE TEXT TO A LABEL
+label1 = Label(root, textvariable=emotion)
+label1.pack()
+label2 = Label(root, textvariable=emotion_desc)
+label2.pack()
 
-
-lb = Label(root, textvariable=text)
-lb.pack()
-
-my_gui = EmotionDetector(root)
 
 root.mainloop()
 
