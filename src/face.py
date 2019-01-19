@@ -44,20 +44,30 @@ def filter_zero_emotions(emotions: List[Tuple[str, float]]) -> None: #filters ze
 
 def start_screen_watch_loop() -> None:  # screenshot loop to scan images
     while True:  # repeat infinitely because true will be true
-        with mss.mss() as sct:  # rename for convenience
-            file_name = 'temp.png'  # name of file we are outputting to
-            sct.shot(output=file_name)
-            # takes a screenshot, and then outputs to temp png
-            cur_face = CF.face.detect(f'./{file_name}', attributes=['emotion'])
-            # api call, call the API and get the emotional attribute
-            if len(cur_face) > 0:  # checks if there is a face, len = # of faces
-                emotions_dict = cur_face[0]['faceAttributes']['emotion']
-                print(emotions_dict)
-                # filters out emotions that are zero
-                print(filter_zero_emotions(dict_sorted_list(emotions_dict)))
-            else:
-                print('nothing')  # if no face, print nothing
+        screenshot()
         time.sleep(3)  # screenshots every 3 seconds
+
+
+def screenshot() -> List[Tuple[str, float]]:
+    file_name = 'temp.png'  # name of file we are outputting to
+    # takes a screenshot, and then outputs to temp.png
+    mss.mss().shot(output=file_name)
+
+    # call the API and get the emotional attribute
+    cur_face = CF.face.detect(f'./{file_name}', attributes=['emotion'])
+
+    if len(cur_face) > 0:  # checks if there is a face, len = # of faces
+        emotions_dict = cur_face[0]['faceAttributes']['emotion']
+        output = filter_zero_emotions(dict_sorted_list(emotions_dict))
+        # filters out emotions that are zero
+        # noinspection PyTypeChecker
+        return output
+    else:
+        return cur_face
+
+
+def top_3_emotions(emotions_list: List[Tuple[str, int]]) -> List[str]:
+    return ([e[0] for e in emotions_list] + ['', '', ''])[:3]
 
 
 if __name__ == '__main__':

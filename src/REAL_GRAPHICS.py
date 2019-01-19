@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import *
+from face import *
 
 master = Tk()
 
@@ -9,10 +10,15 @@ master = Tk()
 emotions_list: a list of string emotions from the face API
 check_def_for: a string variable, used to determine which definition to display
 """
-emotions_list = ["happy", "sad", "mad"]
+emotions_list = top_3_emotions(screenshot())
+svs = [StringVar(), StringVar(), StringVar()]
+for i in range(3):
+    svs[i].set(emotions_list[i])
 check_def_for = StringVar()
 check_def_for.set('Happy')
 status = IntVar()
+labels = []
+
 
 # TODO: REMOVE THIS WHEN SHANNON IS DONE
 emotional_meaning = {'anger': 0.0, 'contempt': 0.002, 'disgust': 0.0,
@@ -64,11 +70,13 @@ class EmotionsList(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        i = 0
-        while i < len(emotions_list):
-            label = tk.Label(self, text=emotions_list[i], font=controller.title_font).grid(row = 0, column=i)
-            button = tk.Button(self, text="Define", command=self.change_current_emotion(controller, i)).grid(row = 1, column = i)
-            i += 1
+        for j in range(len(emotions_list)):
+            label = Label(self, text=emotions_list[j],
+                          font=controller.title_font)
+            label.grid(row=0, column=j)
+            labels.append(label)
+            tk.Button(self, text="Define", command=self.change_current_emotion(
+                controller, j)).grid(row=1, column=j)
 
         rec = Canvas(controller)
         rec.create_rectangle(0, 0, 50, 50, fill="blue")
@@ -82,12 +90,12 @@ class EmotionsList(tk.Frame):
         rec.create_rectangle(0, 0, 50, 50, fill="blue")
         rec.pack()
 
-        # BUTTONS
-        buttons = []
-        for i in range(3):
-            buttons.append(tk.Button(self, text="Definition0",
-                           command=self.change_current_emotion(controller, i)))
-            buttons[i].pack()
+        # # BUTTONS
+        # buttons = []
+        # for i in range(3):
+        #     buttons.append(tk.Button(self, text="Definition0",
+        #                    command=self.change_current_emotion(controller, i)))
+        #     buttons[i].pack()
 
     def change_current_emotion(self, controller, num):
         self.controller = controller
@@ -137,6 +145,19 @@ class DefinitionsPage(tk.Frame):
         pass
 
 
+def facestuff():
+    emotions_list = top_3_emotions(screenshot())
+    print(emotions_list)
+    print(len(labels))
+    for i in range(len(labels)):
+        print(i)
+        labels[i].configure(text=emotions_list[i])
+    print()
+    print()
+    app.after(3000, func=facestuff)
+
+
 if __name__ == "__main__":
     app = Emotions()  # THIS IS THE CONTROLLER
+    app.after(500, func=facestuff)
     app.mainloop()
