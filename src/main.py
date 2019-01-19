@@ -9,10 +9,6 @@ BASE_URL = 'https://canadacentral.api.cognitive.microsoft.com/face/v1.0'
 CF.BaseUrl.set(BASE_URL)
 
 
-def graphics_show(face_data) -> None:
-    print(face_data)
-
-
 def dict_sorted_list(input_dict: Dict[str, float]) -> List[Tuple[str, float]]:
     """Convert a dict to a sorted list of tuples of key-value pairs.
     The dict's values must be numerical.
@@ -56,8 +52,9 @@ def start_screen_watch_loop() -> None:  # screenshot loop to scan images
             # api call, call the API and get the emotional attribute
             if len(cur_face) > 0:  # checks if there is a face, len = # of faces
                 emotions_dict = cur_face[0]['faceAttributes']['emotion']
-                graphics_show(filter_zero_emotions(dict_sorted_list(
-                    emotions_dict)))  # filters out emotions that are zero
+                print(emotions_dict)
+                # filters out emotions that are zero
+                print(filter_zero_emotions(dict_sorted_list(emotions_dict)))
             else:
                 print('nothing')  # if no face, print nothing
         time.sleep(3)  # screenshots every 3 seconds
