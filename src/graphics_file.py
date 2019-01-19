@@ -14,7 +14,7 @@ class EmotionDetector:
         #self.label = Label(master, text="Emotions go here")
         #self.label.pack()
 
-        self.expand_button = Button(master, text="Expand", command=self.change, anchor="nw", justify="right", padx=2)
+        self.expand_button = Button(master, text="Expand", command=self.change, anchor="nw", justify="right", padx=2, bg = "blue")
         self.expand_button.pack()
 
         self.close_button = Button(master, text="Dismiss", command=master.quit)
@@ -27,11 +27,9 @@ class EmotionDetector:
             text.set('IT WORKED!')
 
 
-#cb = Checkbutton(root, variable=status, command=change)
-lb = Label(root, textvariable=text)
-#cb.pack()
-lb.pack()
 
+lb = Label(root, textvariable=text)
+lb.pack()
 
 my_gui = EmotionDetector(root)
 
