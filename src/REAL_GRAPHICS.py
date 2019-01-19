@@ -8,7 +8,7 @@ class Emotions(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
-        
+
 
         self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
         container = tk.Frame(self)
@@ -53,14 +53,24 @@ class DefinitionsPage(tk.Frame):
         label.pack(side="top", fill="x", pady=10)
         button = tk.Button(self, text="Go to the EmotionsList",
                            command=lambda: controller.show_frame("EmotionsList"))
+
+        # Display Definition
+        emotion = "contempt"
+        emotion_def = emotional_meaning[emotion]
+        label = tk.Label(self, text=emotion_def)
+        label.pack(side="top", fill="x", pady=20)
+
+        # Display Back Button
         button.pack()
 
-    def display_def(self):
+    def display_def(self, emotion: str):
         """ Based on data given by _____ display the definitions corresponding to
         the emotion
 
         """
-        #
+        emotion_def = emotional_meaning[emotion]
+        label = tk.Label(self, text=emotion_def)
+        label.pack(side="bottom", fill="x", pady=20)
         pass
 
 

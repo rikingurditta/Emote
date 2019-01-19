@@ -1,6 +1,6 @@
 emotional_meaning = {
     "anger": "A strong feeling of annoyance, displeasure, or hostility.",
-    "contempt": "The feeling that a person or a thing is worthless or beneath \
+    "contempt": "The feeling that a person or a thing is worthless or beneath\
      consideration.",
     "disgust": "A feeling of revulsion or strong disapproval.",
     "fear": "An unpleasant emotion caused by the threat of danger, pain, \
