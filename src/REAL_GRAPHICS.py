@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import font  as tkfont
+from emotions_dict import emotional_meaning
 
 
 class SampleApp(tk.Tk):
@@ -52,7 +53,7 @@ class StartPage(tk.Frame):
         button2.pack()
 
 
-class PageOne(tk.Frame):
+class DefinitionsPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -62,6 +63,15 @@ class PageOne(tk.Frame):
         button = tk.Button(self, text="Go to the start page",
                            command=lambda: controller.show_frame("StartPage"))
         button.pack()
+
+    def display_def(self):
+        """ Based on data given by _____ display the definitions corresponding to
+        the emotion
+
+        """
+        #
+        pass
+
 
 
 if __name__ == "__main__":
