@@ -13,14 +13,19 @@ emotions_list: a list of string emotions from the face API
 check_def_for: a string variable, used to determine which definition to display
 """
 thresh = 0.2
+LABEL_WIDTH = 30
+
 emotions_list = emotion_threshold(screenshot(), thresh)
-top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
+top_3_list = top_3_emotions(emotions_list)
+top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
 
 check_def_for = StringVar()
 status = IntVar()
-LABEL_WIDTH = 30
+
 labels = []
 texts = []
+title_label = []
+emotion_text_label = None
 clicked_on = 'fear'
 
 
@@ -147,28 +152,44 @@ class EmotionsList(tk.Frame):
         button2.place(relx=(0.35), rely=0.6)
 
     def change_current_emotion0(self, controller):
+        global emotion_text_label
         clicked_on = top_3_list[0]
         print(emotions_list)
+        # title_label[0].configure(text=top_3_list[0])
         print ("updated clicked on 0")
-        print(clicked_on)
+        print('clicked on', clicked_on)
         self.controller = controller
         controller.show_frame("DefinitionsPage")
+        title_label[0].configure(text=top_3_list[0])
+        emotion_text_label.configure(text=emotional_meaning[top_3_list[0]])
+        print('top 3 0', top_3_list)
 
     def change_current_emotion1(self, controller):
+        global emotion_text_label
         print (emotions_list)
         clicked_on = top_3_list[1]
+        # title_label[0].configure(text=top_3_list[1])
         print("updated clicked on 1")
-        print(clicked_on)
+        print('clicked on', clicked_on)
         self.controller = controller
         controller.show_frame("DefinitionsPage")
+        title_label[0].configure(text=top_3_list[1])
+        emotion_text_label.configure(text=emotional_meaning[top_3_list[1]])
+        print('top 3 1', top_3_list)
 
     def change_current_emotion2(self, controller):
+        global emotion_text_label
         print(emotions_list)
         clicked_on = top_3_list[2]
+        # title_label[0].configure(text=top_3_list[2])
+        print(title_label[0])
         print("updated clicked on 2")
-        print(clicked_on)
+        print('clicked on', clicked_on)
         self.controller = controller
         controller.show_frame("DefinitionsPage")
+        title_label[0].configure(text=top_3_list[2])
+        emotion_text_label.configure(text=emotional_meaning[top_3_list[2]])
+        print('top 3 2', top_3_list)
 
     def change_current_colour(self, controller, num):
         pass
@@ -192,8 +213,10 @@ class DefinitionsPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text=emotions_list, font=controller.title_font)
+        label = Label(self, text=emotions_list, font=controller.title_font)
+        print('label:', id(label))
         label.pack(side="top", fill="x", pady=10)
+        title_label.append(label)
         button = tk.Button(self, text="Back",
                            command=lambda: controller.show_frame(
                                "EmotionsList"))
@@ -202,6 +225,8 @@ class DefinitionsPage(tk.Frame):
         emotion = "contempt"
         emotion_def = emotional_meaning[clicked_on]
         label = tk.Label(self, text=emotion_def)
+        global emotion_text_label
+        emotion_text_label = label
         label.pack(side="top", fill="x", pady=20)
 
         # Display Back Button
@@ -209,16 +234,21 @@ class DefinitionsPage(tk.Frame):
 
 
 def facestuff():
-    emotions_list = screenshot()
+    global emotions_list
+    global top_3_list
+    global top_ws_list
+    emotions_list = emotion_threshold(screenshot(), thresh)
     top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
+    print('top 3', top_3_list)
     top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
+    # print('top w', top_ws_list)
     print(emotions_list, '\n' * 2)
     for i in range(len(labels)):
         colour = emotion_colour[top_3_list[i]]
         labels[i].configure(text=top_3_list[i], bg=colour, width=top_ws_list[i])
         texts[i].configure(bg=colour, width=top_ws_list[i])
+    # title_label[0].configure(text=top_3_list[0])
     app.after(4000, func=facestuff)
-
 
 if __name__ == "__main__":
     app = Emotions()  # THIS IS THE CONTROLLER
