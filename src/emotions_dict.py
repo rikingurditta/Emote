@@ -12,5 +12,17 @@ emotional_meaning = {
     something unexpected."
 }
 
+emotion_colour = {
+    "anger": "red",
+    "contempt": "white",
+    "disgust": "yellow",
+    "fear": "blue",
+    "happiness": "yellow",
+    "neutral": "black",
+    "sadness": "blue",
+    "surprise": "red",
+    "": "black"
+}
+
 # Definitions from Oxford Dictionary
 # https://en.oxforddictionaries.com/

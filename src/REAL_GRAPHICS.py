@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import *
 from face import *
-from emotions_dict import emotional_meaning
+from emotions_dict import emotional_meaning, emotion_colour
 master = Tk()
 
 """
@@ -68,16 +68,56 @@ class EmotionsList(tk.Frame):
     """
 
     def __init__(self, parent, controller):
+        """ Initiaizes frames, layers and general page layout"""
         tk.Frame.__init__(self, parent)
-        self.controller = controller
+        # self.controller = controller
+        # Draw background
+        #self.text = tk.Text(self, bg="orange")
+        #self.text.grid(row=2, column=3) #, ipadx=0, ipady=0, padx=100, pady=100)
+        self.draw_rectangle(controller)
+        """
+        # Draw Buttons
         for j in range(len(emotions_list)):
-            label = Label(self, text=emotions_list[j],
-                          font=controller.title_font)
-            label.grid(row=0, column=j)
+            # Initialize background based on colour
+            print(emotion_colour[emotions_list[j]])
+            colour = emotion_colour[emotions_list[j]]
+            self.text = tk.Text(self, bg=colour, width=30, height=10) #emotion_colour[emotions_list[j]])
+            self.text.grid(row=2, column=j, rowspan=1)
+
+            # Find emotion in list
+            label = Label(self.text, text=emotions_list[j],
+                            font=controller.title_font, bg=colour)
+            label.place(relx=0.35, rely=0.4)
             labels.append(label)
-            tk.Button(self, text="Define", command=self.change_current_emotion(
-                controller, j)).grid(row=1, column=j)
 
+            # Display button with corresponding emotion
+            button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
+                controller, j))
+            button.place(relx=(0.35), rely=0.6)
+        """
+
+    def draw_rectangle(self, controller):
+        """ Draw Buttons and Widgets"""
+        for j in range(len(emotions_list)):
+            # Initialize background based on colour
+            print(emotion_colour[emotions_list[j]])
+            colour = emotion_colour[emotions_list[j]]
+            self.text = tk.Text(self, bg=colour, width=30, height=10) #emotion_colour[emotions_list[j]])
+            self.text.grid(row=2, column=j, rowspan=1)
+
+            # Find emotion in list
+            label = Label(self.text, text=emotions_list[j],
+                            font=controller.title_font, bg=colour)
+            label.place(relx=0.35, rely=0.4)
+            labels.append(label)
+
+            # Display button with corresponding emotion
+            button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
+                controller, j))
+            button.place(relx=(0.35), rely=0.6)
+
+
+        '''
         rec = Canvas(controller)
         rec.create_rectangle(0, 0, 50, 50, fill="blue")
         rec.pack()
@@ -89,6 +129,7 @@ class EmotionsList(tk.Frame):
         rec = Canvas(controller)
         rec.create_rectangle(0, 0, 50, 50, fill="blue")
         rec.pack()
+        '''
 
         # # BUTTONS
         # buttons = []
@@ -100,6 +141,7 @@ class EmotionsList(tk.Frame):
     def change_current_emotion(self, controller, num):
         self.controller = controller
         check_def_for.set(emotions_list[num])
+        controller.show_frame("DefinitionsPage")
 
         # MAKING RECTANGLES
 
@@ -147,6 +189,7 @@ class DefinitionsPage(tk.Frame):
 
 def facestuff():
     emotions_list = top_3_emotions(screenshot())
+
     print(emotions_list)
     print(len(labels))
     for i in range(len(labels)):
