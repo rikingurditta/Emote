@@ -1,15 +1,12 @@
 emotional_meaning = {
-    "anger": "A strong feeling of annoyance, displeasure, or hostility.",
-    "contempt": "The feeling that a person or a thing is worthless or beneath\
-     consideration.",
-    "disgust": "A feeling of revulsion or strong disapproval.",
-    "fear": "An unpleasant emotion caused by the threat of danger, pain, \
-     or harm.",
-    "happiness": "Feeling or showing pleasure or contentment.",
-    "neutral": "Having neither a positive nor negative emotion",
-    "sadness": "Feeling or showing sorrow; unhappy",
-    "surprise": "A feeling of mild astonishment or shock caused by \
-    something unexpected."
+    "sadness" : ("frowning","quiet voice", "tears"), #this is a tuple
+    "happiness" : ("smile","loud voice", "body moving around a lot"),
+    "fear": ("wrinkled forehead", "quiet voice", "eyes wide open"),
+    "anger" : ("loud voice","big hand gestures or hitting things", "lips become thinner"),
+    "surprise" : ("mouth in the shape of an O","quick, loud vocal noise", "eyebrows raised"),
+    "neutral" : ("voice is not loud or quiet","little hand gestures", "lips not curled"),
+    "disgust" : ("wrinked nose","shake head", "sounds of 'ach' or 'ugh'"),
+    "contempt" : ("wrinked nose","shake head", "curled lip")
 }
 
 emotion_colour = {

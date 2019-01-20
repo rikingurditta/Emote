@@ -13,9 +13,9 @@ def dict_sorted_list(input_dict: Dict[str, float]) -> List[Tuple[str, float]]:
     """Convert a dict to a sorted list of tuples of key-value pairs.
     The dict's values must be numerical.
     turn key-value pair into a list of tuples (like a list), then sort the list
-    >>> d = {'a': 3, 'b': 1, 'c': 2.6}
+    >>> d = {'anger': 0.4, 'happiness': 0.25, 'neutral': 0.35}
     >>> dict_sorted_list(d)
-    [('a', 3), ('c', 2.6), ('b', 1)]
+    [('anger', 0.4), ('neutral', 0.35), ('happiness', 0.25)]
     """
 
     output_list = []  # variable for output
@@ -27,7 +27,8 @@ def dict_sorted_list(input_dict: Dict[str, float]) -> List[Tuple[str, float]]:
     return output_list
 
 
-def filter_zero_emotions(emotions: List[Tuple[str, float]]) -> None: #filters zero emotion
+# filters zero emotion
+def filter_zero_emotions(emotions: List[Tuple[str, float]]) -> None:
     """Return emotions from list whose values are >0.
     (filters zero emotion)
     """
@@ -48,6 +49,31 @@ def start_screen_watch_loop() -> None:  # screenshot loop to scan images
         time.sleep(3)  # screenshots every 3 seconds
 
 
+def emotion_threshold(emotions: List[Tuple[str, float]], threshold) -> List[Tuple[str, float]]:
+    """Return a list of only emotion-value pairs whose values are greater than
+    or equal to the threshold.
+
+    >>> emotion_threshold([('anger', 0.5), ('happiness', 0.4)], 0.5)
+    [('anger', 0.5)]
+    """
+    output = []
+    for emotion in emotions:
+        if emotion[1] >= threshold:
+            output.append(emotion)
+    return output
+
+
+def top_3_emotions(emotions_list: List[Tuple[str, float]]) -> List[str]:
+    """Return a list of the 3 most probable emotions, given a sorted list. If
+    there are less than 3 probable emotions, pad the list with empty strings to
+    make it length 3.
+
+    >>> top_3_emotions([('anger', 0.5), ('happiness', 0.4)])
+    ['anger', 'happiness', '']
+    """
+    return ([e[0] for e in emotions_list] + ['', '', ''])[:3]
+
+
 def screenshot() -> List[Tuple[str, float]]:
     file_name = 'temp.png'  # name of file we are outputting to
     # takes a screenshot, and then outputs to temp.png
@@ -58,16 +84,11 @@ def screenshot() -> List[Tuple[str, float]]:
 
     if len(cur_face) > 0:  # checks if there is a face, len = # of faces
         emotions_dict = cur_face[0]['faceAttributes']['emotion']
-        output = filter_zero_emotions(dict_sorted_list(emotions_dict))
         # filters out emotions that are zero
-        # noinspection PyTypeChecker
-        return output
+        return filter_zero_emotions(dict_sorted_list(emotions_dict))
     else:
-        return cur_face
+        return []
 
-
-def top_3_emotions(emotions_list: List[Tuple[str, int]]) -> List[str]:
-    return ([e[0] for e in emotions_list] + ['', '', ''])[:3]
 
 
 if __name__ == '__main__':
