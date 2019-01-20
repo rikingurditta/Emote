@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import *
 from face import *
-from emotions_dict import emotional_meaning, emotion_colour
+from emotions_dict import emotional_meaning
+from colour_scheme import emotion_colour
 master = Tk()
 
 """

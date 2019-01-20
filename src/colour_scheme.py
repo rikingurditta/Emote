@@ -1,9 +1,11 @@
-
-fear_colour = "#336699"
-sadness_colour = "#86bbd8"
-anger_colour = "#2f4858"
-surprise_colour = "#9ee493"
-happy_colour = "#daf7dc"
-neutral_colour = "#dce1df"
-contempt_colour = "#3ea7ba"
-disgust = "#39b599"
+emotion_colour = {
+    "fear": "#336699",
+    "sadness": "#86bbd8",
+    "anger": "#2f4858",
+    "surprise": "#9ee493",
+    "happiness": "#daf7dc",
+    "neutral": "#dce1df",
+    "contempt": "#3ea7ba",
+    "disgust": "#39b599",
+    "": "white"
+}
