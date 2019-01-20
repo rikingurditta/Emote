@@ -100,14 +100,14 @@ class EmotionsList(tk.Frame):
         # ++++++ BUTTON 0 ++++++
         # Initialize background based on colour
         colour = emotion_colour[top_3_list[0]]
-        self.text = tk.Text(self, bg=colour, width=30, height=10)
+        self.text = tk.Text(self, bg=colour, width=LABEL_WIDTH, height=10)
         texts.append(self.text)
         self.text.grid(row=2, column=0, rowspan=1)
 
         # Find emotion in list
         label = Label(self.text, text=top_3_list[0],
                         font=controller.title_font, bg=colour)
-        label.place(relx=0.35, rely=0.4)
+        label.place(relx=0, rely=0.4)
         labels.append(label)
 
         # Display button with corresponding emotion
@@ -118,14 +118,14 @@ class EmotionsList(tk.Frame):
         # ++++++ BUTTON 1 ++++++
         # Initialize background based on colour
         colour = emotion_colour[top_3_list[1]]
-        self.text = tk.Text(self, bg=colour, width=30, height=10)
+        self.text = tk.Text(self, bg=colour, width=LABEL_WIDTH, height=10)
         texts.append(self.text)
         self.text.grid(row=2, column=1, rowspan=1)
 
         # Find emotion in list
         label = Label(self.text, text=top_3_list[1],
                         font=controller.title_font, bg=colour)
-        label.place(relx=0.35, rely=0.4)
+        label.place(relx=0, rely=0.4)
         labels.append(label)
 
         # Display button with corresponding emotion
@@ -136,14 +136,14 @@ class EmotionsList(tk.Frame):
         # ++++++ BUTTON 2 ++++++
         # Initialize background based on colour
         colour = emotion_colour[top_3_list[2]]
-        self.text = tk.Text(self, bg=colour, width=30, height=10)
+        self.text = tk.Text(self, bg=colour, width=LABEL_WIDTH, height=10)
         texts.append(self.text)
         self.text.grid(row=2, column=2, rowspan=1)
 
         # Find emotion in list
         label = Label(self.text, text=top_3_list[2],
                             font=controller.title_font, bg=colour)
-        label.place(relx=0.35, rely=0.4)
+        label.place(relx=0, rely=0.4)
         labels.append(label)
 
         # Display button with corresponding emotion

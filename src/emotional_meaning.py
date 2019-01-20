@@ -5,6 +5,6 @@ emotional_meaning = {
     "anger" : ("loud voice","big hand gestures or hitting things", "lips become thinner"),
     "surprise" : ("mouth in the shape of an O","quick, loud vocal noise", "eyebrows raised"),
     "neutral" : ("voice is not loud or quiet","little hand gestures", "lips not curled"),
-    "disgust" : ("wrinked nose","shake head", "sounds of 'ach' or 'ugh'"),
-    "contempt" : ("wrinked nose","shake head", "curled lip")
+    "disgust" : ("wrinkled nose","shake head", "sounds of 'ach' or 'ugh'"),
+    "contempt" : ("wrinkled nose","shake head", "curled lip")
 }
