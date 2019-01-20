@@ -35,7 +35,7 @@ class Emotions(tk.Tk):  # THIS IS A CONTROLLER
 
         # Format screens
         tk.Tk.__init__(self, *args, **kwargs)
-        self.title_font = tkfont.Font(family='Helvetica', size=18,
+        self.title_font = tkfont.Font(family='Helvetica', size=30,
                                       weight="bold", slant="italic")
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
@@ -78,6 +78,8 @@ class EmotionsList(tk.Frame):
 
     def draw_rectangle(self, controller):
         """ Draw Buttons and Widgets """
+        font = tkfont.Font(family='Helvetica', size=30,
+                                      weight="bold", slant="italic")
         # ++++++ BUTTON 0 ++++++
         # Initialize background based on colour
         colour = emotion_colour[top_3_list[0]]
@@ -87,8 +89,9 @@ class EmotionsList(tk.Frame):
 
         # Find emotion in list
         label = Label(self.text, text=top_3_list[0],
-                        font=controller.title_font, bg=colour, anchor="w")
-        label.place(relx=0.35, rely=0.4)
+                        font=font, bg=colour, anchor="w")
+        label.config(font=("Helvetica", 44))
+        label.place(relx=0.3, rely=0.2)
         labels.append(label)
 
         # Display button with corresponding emotion
@@ -106,7 +109,8 @@ class EmotionsList(tk.Frame):
         # Find emotion in list
         label = Label(self.text, text=top_3_list[1],
                         font=controller.title_font, bg=colour)
-        label.place(relx=0, rely=0.4)
+        label.config(font=("Helvetica", 44))
+        label.place(relx=0, rely=0.2)
         labels.append(label)
 
         # Display button with corresponding emotion
@@ -124,7 +128,8 @@ class EmotionsList(tk.Frame):
         # Find emotion in list
         label = Label(self.text, text=top_3_list[2],
                             font=controller.title_font, bg=colour)
-        label.place(relx=0, rely=0.4)
+        label.config(font=("Helvetica", 44))
+        label.place(relx=0, rely=0.2)
         labels.append(label)
 
         # Display button with corresponding emotion
@@ -136,21 +141,24 @@ class EmotionsList(tk.Frame):
         global emotion_text_label
         self.controller = controller
         controller.show_frame("DefinitionsPage")
-        title_label[0].configure(text=top_3_list[0])
+        colour = emotion_colour[top_3_list[0]]
+        title_label[0].configure(text=top_3_list[0], fg=colour)
         emotion_text_label.configure(text=emotional_meaning[top_3_list[0]])
 
     def change_current_emotion1(self, controller):
         global emotion_text_label
         self.controller = controller
         controller.show_frame("DefinitionsPage")
-        title_label[0].configure(text=top_3_list[1])
+        colour = emotion_colour[top_3_list[1]]
+        title_label[0].configure(text=top_3_list[1], fg=colour)
         emotion_text_label.configure(text=emotional_meaning[top_3_list[1]])
 
     def change_current_emotion2(self, controller):
         global emotion_text_label
         self.controller = controller
         controller.show_frame("DefinitionsPage")
-        title_label[0].configure(text=top_3_list[2])
+        colour = emotion_colour[top_3_list[2]]
+        title_label[0].configure(text=top_3_list[2], fg=colour)
         emotion_text_label.configure(text=emotional_meaning[top_3_list[2]])
 
 
@@ -158,8 +166,8 @@ class DefinitionsPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = Label(self, text=emotions_list, font=controller.title_font)
-        print('label:', id(label))
+        label = Label(self, text=emotions_list)
+        label.config(font=("Helvetica", 44))
         label.pack(side="top", fill="x", pady=10)
         title_label.append(label)
         button = tk.Button(self, text="Back",
