@@ -4,6 +4,7 @@ from tkinter import *
 from face import *
 from emotions_dict import emotional_meaning
 from colour_scheme import emotion_colour
+
 master = Tk()
 
 """
@@ -18,6 +19,7 @@ for i in range(3):
 check_def_for = StringVar()
 check_def_for.set('Happy')
 status = IntVar()
+LABEL_WIDTH = 30
 labels = []
 texts = []
 
@@ -99,14 +101,14 @@ class EmotionsList(tk.Frame):
         for j in range(len(emotions_list)):
             # Initialize background based on colour
             colour = emotion_colour[emotions_list[j]]
-            self.text = tk.Text(self, bg=colour, width=30, height=10)
+            self.text = tk.Text(self, bg=colour, width=LABEL_WIDTH, height=10)
             texts.append(self.text)
             self.text.grid(row=2, column=j, rowspan=1)
 
             # Find emotion in list
             label = Label(self.text, text=emotions_list[j],
                             font=controller.title_font, bg=colour)
-            label.place(relx=0.35, rely=0.4)
+            label.place(relx=0, rely=0.4)
             labels.append(label)
 
             # Display button with corresponding emotion
@@ -189,17 +191,20 @@ class DefinitionsPage(tk.Frame):
 
 
 def facestuff():
-    emotions_list = top_3_emotions(screenshot())
+    thresh = 0.2
+    emotions_list = screenshot()
+    top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
+    top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
     print(emotions_list)
     print(len(labels))
     for i in range(len(labels)):
         print(i)
-        colour = emotion_colour[emotions_list[i]]
-        labels[i].configure(text=emotions_list[i], bg=colour)
-        texts[i].configure(bg=colour)
+        colour = emotion_colour[top_3_list[i]]
+        labels[i].configure(text=top_3_list[i], bg=colour, width=top_ws_list[i])
+        texts[i].configure(bg=colour, width=top_ws_list[i])
     print()
     print()
-    app.after(3000, func=facestuff)
+    app.after(4000, func=facestuff)
 
 
 if __name__ == "__main__":

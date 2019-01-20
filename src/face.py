@@ -74,6 +74,18 @@ def top_3_emotions(emotions_list: List[Tuple[str, float]]) -> List[str]:
     return ([e[0] for e in emotions_list] + ['', '', ''])[:3]
 
 
+def top_3_widths(emotions_list: List[Tuple[str, float]], width) -> List[int]:
+    emotions_list += [('', 0), ('', 0), ('', 0)]
+    total = 0
+    for i in range(3):
+        total += emotions_list[i][1]
+
+    if total != 0:
+        return [round(e[1]/total*width*3) for e in emotions_list]
+    else:
+        return [width] * 3
+
+
 def screenshot() -> List[Tuple[str, float]]:
     file_name = 'temp.png'  # name of file we are outputting to
     # takes a screenshot, and then outputs to temp.png
