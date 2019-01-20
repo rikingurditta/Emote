@@ -149,14 +149,16 @@ class EmotionsList(tk.Frame):
         global emotion_text_label
         self.controller = controller
         controller.show_frame("DefinitionsPage")
-        title_label[0].configure(text=top_3_list[1])
+        colour = emotion_colour[top_3_list[1]]
+        title_label[0].configure(text=top_3_list[1], fg=colour)
         emotion_text_label.configure(text=emotional_meaning[top_3_list[1]])
 
     def change_current_emotion2(self, controller):
         global emotion_text_label
         self.controller = controller
         controller.show_frame("DefinitionsPage")
-        title_label[0].configure(text=top_3_list[2])
+        colour = emotion_colour[top_3_list[2]]
+        title_label[0].configure(text=top_3_list[2], fg=colour)
         emotion_text_label.configure(text=emotional_meaning[top_3_list[2]])
 
 
