@@ -146,12 +146,13 @@ class DefinitionsPage(tk.Frame):
 
 
 def facestuff():
-    emotions_list = top_3_emotions(screenshot())
-    print(emotions_list)
+    emotions_list = screenshot()
+    top_3 = top_3_emotions(emotions_list)
+    print(top_3)
     print(len(labels))
     for i in range(len(labels)):
         print(i)
-        labels[i].configure(text=emotions_list[i])
+        labels[i].configure(text=top_3[i])
     print()
     print()
     app.after(3000, func=facestuff)
