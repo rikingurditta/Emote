@@ -1,10 +1,10 @@
 emotional_meaning = {
-    "sadness" : ("frowning","quiet voice", "tears"), #this is a tuple
-    "happiness" : ("smile","loud voice", "body moving around a lot"),
-    "fear": ("wrinkled forehead", "quiet voice", "eyes wide open"),
-    "anger" : ("loud voice","big hand gestures or hitting things", "lips become thinner"),
-    "surprise" : ("mouth in the shape of an O","quick, loud vocal noise", "eyebrows raised"),
-    "neutral" : ("voice is not loud or quiet","little hand gestures", "lips not curled"),
-    "disgust" : ("wrinkled nose","shake head", "sounds of 'ach' or 'ugh'"),
-    "contempt" : ("wrinkled nose","shake head", "curled lip")
+    "sadness" : ("frowning","quiet voice", "watery eyes"), #this is a tuple
+    "happiness" : ("smiling","loud voice", "eye contact"),
+    "fear": ("fidgeting", "sweating", "lack of eye contact"),
+    "anger" : ("loud voice", "clenched fists", "red face"),
+    "surprise" : ("mouth in the shape of an O","wide eyes", "eyebrows raised"),
+    "neutral" : ("straight lips","monotone voice", "relaxed face"),
+    "disgust" : ("wrinkled nose","shake head", "cheeks raised"),
+    "contempt" : ("narrow eyes","firm eye contact", "curled lip")
 }
