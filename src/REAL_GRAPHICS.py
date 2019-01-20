@@ -190,6 +190,7 @@ def facestuff():
         texts[i].configure(bg=colour, width=top_ws_list[i])
     app.after(4000, func=facestuff)
 
+
 if __name__ == "__main__":
     app = Emotions()  # THIS IS THE CONTROLLER
     app.after(500, func=facestuff)
