@@ -12,22 +12,16 @@ master = Tk()
 emotions_list: a list of string emotions from the face API
 check_def_for: a string variable, used to determine which definition to display
 """
-emotions_list = top_3_emotions(screenshot())
-svs = [StringVar(), StringVar(), StringVar()]
-for i in range(3):
-    svs[i].set(emotions_list[i])
+thresh = 0.2
+emotions_list = emotion_threshold(screenshot(), thresh)
+top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
+
 check_def_for = StringVar()
-check_def_for.set('Happy')
 status = IntVar()
 LABEL_WIDTH = 30
 labels = []
 texts = []
-
-
-# TODO: REMOVE THIS WHEN SHANNON IS DONE
-emotional_meaning = {'anger': 0.0, 'contempt': 0.002, 'disgust': 0.0,
-                     'fear': 0.0, 'happiness': 0.707, 'neutral': 0.276,
-                     'sadness': 0.015, 'surprise': 0.0}
+clicked_on = 'fear'
 
 
 class Emotions(tk.Tk):  # THIS IS A CONTROLLER
@@ -100,87 +94,80 @@ class EmotionsList(tk.Frame):
         """ Draw Buttons and Widgets"""
         # ++++++ BUTTON 0 ++++++
         # Initialize background based on colour
-        colour = emotion_colour[emotions_list[0]]
+        colour = emotion_colour[top_3_list[0]]
         self.text = tk.Text(self, bg=colour, width=30, height=10)
         texts.append(self.text)
         self.text.grid(row=2, column=0, rowspan=1)
 
         # Find emotion in list
-        label = Label(self.text, text=emotions_list[0],
+        label = Label(self.text, text=top_3_list[0],
                         font=controller.title_font, bg=colour)
         label.place(relx=0.35, rely=0.4)
         labels.append(label)
 
         # Display button with corresponding emotion
-        button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
-            controller, 0))
-        button.place(relx=(0.35), rely=0.6)
+        button0 = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion0(
+            controller))
+        button0.place(relx=(0.35), rely=0.6)
 
         # ++++++ BUTTON 1 ++++++
         # Initialize background based on colour
-        colour = emotion_colour[emotions_list[1]]
+        colour = emotion_colour[top_3_list[1]]
         self.text = tk.Text(self, bg=colour, width=30, height=10)
         texts.append(self.text)
         self.text.grid(row=2, column=1, rowspan=1)
 
         # Find emotion in list
-        label = Label(self.text, text=emotions_list[1],
+        label = Label(self.text, text=top_3_list[1],
                         font=controller.title_font, bg=colour)
         label.place(relx=0.35, rely=0.4)
         labels.append(label)
 
         # Display button with corresponding emotion
-        button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
-             controller, 1))
-        button.place(relx=(0.35), rely=0.6)
+        button1 = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion1(
+             controller))
+        button1.place(relx=(0.35), rely=0.6)
 
         # ++++++ BUTTON 2 ++++++
         # Initialize background based on colour
-        colour = emotion_colour[emotions_list[2]]
+        colour = emotion_colour[top_3_list[2]]
         self.text = tk.Text(self, bg=colour, width=30, height=10)
         texts.append(self.text)
         self.text.grid(row=2, column=2, rowspan=1)
 
         # Find emotion in list
-        label = Label(self.text, text=emotions_list[2],
+        label = Label(self.text, text=top_3_list[2],
                             font=controller.title_font, bg=colour)
         label.place(relx=0.35, rely=0.4)
         labels.append(label)
 
         # Display button with corresponding emotion
-        button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
-            controller, 2))
-        button.place(relx=(0.35), rely=0.6)
+        button2 = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion2(
+            controller))
+        button2.place(relx=(0.35), rely=0.6)
 
-
-
-        """
-            # MAKE THE BUTTONS
-            button0 = tk.Button(self.text, text="Define",
-                                command=lambda: self.change_current_emotion(
-                                    controller, 0))
-            button1 = tk.Button(self.text, text="Define",
-                                command=lambda: self.change_current_emotion(
-                                    controller, 1))
-            button2 = tk.Button(self.text, text="Define",
-                                command=lambda: self.change_current_emotion(
-                                    controller, 2))
-
-            # GRID THE BUTTONS
-            button0.place(relx=(0.35), rely=0.6)
-            button1.place(relx=(0.35), rely=0.6)
-            """
-
-        # # BUTTONS
-        # buttons = []
-        # for i in range(3):
-        #     buttons.append(tk.Button(self, text="Definition0",
-        #                    command=self.change_current_emotion(controller, i)))
-        #     buttons[i].pack()
-
-    def change_current_emotion(self, controller, num):
+    def change_current_emotion0(self, controller):
+        clicked_on = top_3_list[0]
+        print(emotions_list)
+        print ("updated clicked on 0")
+        print(clicked_on)
         self.controller = controller
-        check_def_for.set(emotions_list[num])
+        controller.show_frame("DefinitionsPage")
+
+    def change_current_emotion1(self, controller):
+        print (emotions_list)
+        clicked_on = top_3_list[1]
+        print("updated clicked on 1")
+        print(clicked_on)
+        self.controller = controller
+        controller.show_frame("DefinitionsPage")
+
+    def change_current_emotion2(self, controller):
+        print(emotions_list)
+        clicked_on = top_3_list[2]
+        print("updated clicked on 2")
+        print(clicked_on)
+        self.controller = controller
         controller.show_frame("DefinitionsPage")
 
     def change_current_colour(self, controller, num):
@@ -213,7 +200,7 @@ class DefinitionsPage(tk.Frame):
 
         # Display Definition
         emotion = "contempt"
-        emotion_def = "hi"
+        emotion_def = emotional_meaning[clicked_on]
         label = tk.Label(self, text=emotion_def)
         label.pack(side="top", fill="x", pady=20)
 
@@ -222,7 +209,6 @@ class DefinitionsPage(tk.Frame):
 
 
 def facestuff():
-    thresh = 0.2
     emotions_list = screenshot()
     top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
     top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
