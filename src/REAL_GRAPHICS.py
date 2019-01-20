@@ -98,38 +98,78 @@ class EmotionsList(tk.Frame):
 
     def draw_rectangle(self, controller):
         """ Draw Buttons and Widgets"""
-        for j in range(len(emotions_list)):
-            # Initialize background based on colour
-            colour = emotion_colour[emotions_list[j]]
-            self.text = tk.Text(self, bg=colour, width=LABEL_WIDTH, height=10)
-            texts.append(self.text)
-            self.text.grid(row=2, column=j, rowspan=1)
+        # ++++++ BUTTON 0 ++++++
+        # Initialize background based on colour
+        colour = emotion_colour[emotions_list[0]]
+        self.text = tk.Text(self, bg=colour, width=30, height=10)
+        texts.append(self.text)
+        self.text.grid(row=2, column=0, rowspan=1)
 
-            # Find emotion in list
-            label = Label(self.text, text=emotions_list[j],
+        # Find emotion in list
+        label = Label(self.text, text=emotions_list[0],
+                        font=controller.title_font, bg=colour)
+        label.place(relx=0.35, rely=0.4)
+        labels.append(label)
+
+        # Display button with corresponding emotion
+        button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
+            controller, 0))
+        button.place(relx=(0.35), rely=0.6)
+
+        # ++++++ BUTTON 1 ++++++
+        # Initialize background based on colour
+        colour = emotion_colour[emotions_list[1]]
+        self.text = tk.Text(self, bg=colour, width=30, height=10)
+        texts.append(self.text)
+        self.text.grid(row=2, column=1, rowspan=1)
+
+        # Find emotion in list
+        label = Label(self.text, text=emotions_list[1],
+                        font=controller.title_font, bg=colour)
+        label.place(relx=0.35, rely=0.4)
+        labels.append(label)
+
+        # Display button with corresponding emotion
+        button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
+             controller, 1))
+        button.place(relx=(0.35), rely=0.6)
+
+        # ++++++ BUTTON 2 ++++++
+        # Initialize background based on colour
+        colour = emotion_colour[emotions_list[2]]
+        self.text = tk.Text(self, bg=colour, width=30, height=10)
+        texts.append(self.text)
+        self.text.grid(row=2, column=2, rowspan=1)
+
+        # Find emotion in list
+        label = Label(self.text, text=emotions_list[2],
                             font=controller.title_font, bg=colour)
-            label.place(relx=0, rely=0.4)
-            labels.append(label)
+        label.place(relx=0.35, rely=0.4)
+        labels.append(label)
 
-            # Display button with corresponding emotion
-            button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
-                controller, j))
-            button.place(relx=(0.35), rely=0.6)
+        # Display button with corresponding emotion
+        button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
+            controller, 2))
+        button.place(relx=(0.35), rely=0.6)
 
 
-        '''
-        rec = Canvas(controller)
-        rec.create_rectangle(0, 0, 50, 50, fill="blue")
-        rec.pack()
 
-        rec = Canvas(controller)
-        rec.create_rectangle(0, 0, 50, 50, fill="blue")
-        rec.pack()
+        """
+            # MAKE THE BUTTONS
+            button0 = tk.Button(self.text, text="Define",
+                                command=lambda: self.change_current_emotion(
+                                    controller, 0))
+            button1 = tk.Button(self.text, text="Define",
+                                command=lambda: self.change_current_emotion(
+                                    controller, 1))
+            button2 = tk.Button(self.text, text="Define",
+                                command=lambda: self.change_current_emotion(
+                                    controller, 2))
 
-        rec = Canvas(controller)
-        rec.create_rectangle(0, 0, 50, 50, fill="blue")
-        rec.pack()
-        '''
+            # GRID THE BUTTONS
+            button0.place(relx=(0.35), rely=0.6)
+            button1.place(relx=(0.35), rely=0.6)
+            """
 
         # # BUTTONS
         # buttons = []
@@ -179,15 +219,6 @@ class DefinitionsPage(tk.Frame):
 
         # Display Back Button
         button.pack()
-
-    def display_def(self, emotion: str):
-        """Based on data given by _____ display the definitions corresponding
-        to the emotion
-        """
-        emotion_def = emotional_meaning[emotion]
-        label = tk.Label(self, text=emotion_def)
-        label.pack(side="bottom", fill="x", pady=20)
-        pass
 
 
 def facestuff():
