@@ -17,11 +17,11 @@ emotion_colour = {
     "contempt": "white",
     "disgust": "yellow",
     "fear": "blue",
-    "happiness": "yellow",
+    "happiness": "gold",
     "neutral": "black",
-    "sadness": "blue",
+    "sadness": "deep sky blue",
     "surprise": "red",
-    "": "black"
+    "": "azure"
 }
 
 # Definitions from Oxford Dictionary

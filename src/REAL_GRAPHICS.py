@@ -18,6 +18,7 @@ check_def_for = StringVar()
 check_def_for.set('Happy')
 status = IntVar()
 labels = []
+texts = []
 
 
 # TODO: REMOVE THIS WHEN SHANNON IS DONE
@@ -70,10 +71,6 @@ class EmotionsList(tk.Frame):
     def __init__(self, parent, controller):
         """ Initiaizes frames, layers and general page layout"""
         tk.Frame.__init__(self, parent)
-        # self.controller = controller
-        # Draw background
-        #self.text = tk.Text(self, bg="orange")
-        #self.text.grid(row=2, column=3) #, ipadx=0, ipady=0, padx=100, pady=100)
         self.draw_rectangle(controller)
         """
         # Draw Buttons
@@ -100,9 +97,9 @@ class EmotionsList(tk.Frame):
         """ Draw Buttons and Widgets"""
         for j in range(len(emotions_list)):
             # Initialize background based on colour
-            print(emotion_colour[emotions_list[j]])
             colour = emotion_colour[emotions_list[j]]
-            self.text = tk.Text(self, bg=colour, width=30, height=10) #emotion_colour[emotions_list[j]])
+            self.text = tk.Text(self, bg=colour, width=30, height=10)
+            texts.append(self.text)
             self.text.grid(row=2, column=j, rowspan=1)
 
             # Find emotion in list
@@ -142,6 +139,9 @@ class EmotionsList(tk.Frame):
         self.controller = controller
         check_def_for.set(emotions_list[num])
         controller.show_frame("DefinitionsPage")
+
+    def change_current_colour(self, controller, num):
+        pass
 
         # MAKING RECTANGLES
 
@@ -189,12 +189,13 @@ class DefinitionsPage(tk.Frame):
 
 def facestuff():
     emotions_list = top_3_emotions(screenshot())
-
     print(emotions_list)
     print(len(labels))
     for i in range(len(labels)):
         print(i)
-        labels[i].configure(text=emotions_list[i])
+        colour = emotion_colour[emotions_list[i]]
+        labels[i].configure(text=emotions_list[i], bg=colour)
+        texts[i].configure(bg=colour)
     print()
     print()
     app.after(3000, func=facestuff)
