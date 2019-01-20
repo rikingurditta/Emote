@@ -195,15 +195,11 @@ def facestuff():
     emotions_list = screenshot()
     top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
     top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
-    print(emotions_list)
-    print(len(labels))
+    print(emotions_list, '\n' * 2)
     for i in range(len(labels)):
-        print(i)
         colour = emotion_colour[top_3_list[i]]
         labels[i].configure(text=top_3_list[i], bg=colour, width=top_ws_list[i])
         texts[i].configure(bg=colour, width=top_ws_list[i])
-    print()
-    print()
     app.after(4000, func=facestuff)
 
 
