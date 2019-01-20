@@ -12,12 +12,12 @@ master = Tk()
 emotions_list: a list of string emotions from the face API
 check_def_for: a string variable, used to determine which definition to display
 """
-thresh = 0.2
+THRESHOLD = 0.1
 LABEL_WIDTH = 30
 
-emotions_list = emotion_threshold(screenshot(), thresh)
+emotions_list = emotion_threshold(screenshot(), THRESHOLD)
 top_3_list = top_3_emotions(emotions_list)
-top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
+top_ws_list = top_3_widths(emotion_threshold(emotions_list, THRESHOLD), LABEL_WIDTH)
 
 check_def_for = StringVar()
 status = IntVar()
@@ -181,9 +181,9 @@ def facestuff():
     global emotions_list
     global top_3_list
     global top_ws_list
-    emotions_list = emotion_threshold(screenshot(), thresh)
-    top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
-    top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
+    emotions_list = emotion_threshold(screenshot(), THRESHOLD)
+    top_3_list = top_3_emotions(emotion_threshold(emotions_list, THRESHOLD))
+    top_ws_list = top_3_widths(emotion_threshold(emotions_list, THRESHOLD), LABEL_WIDTH)
     for i in range(len(labels)):
         colour = emotion_colour[top_3_list[i]]
         labels[i].configure(text=top_3_list[i], bg=colour, width=top_ws_list[i])
