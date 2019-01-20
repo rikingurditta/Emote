@@ -74,29 +74,10 @@ class EmotionsList(tk.Frame):
         """ Initiaizes frames, layers and general page layout"""
         tk.Frame.__init__(self, parent)
         self.draw_rectangle(controller)
-        """
-        # Draw Buttons
-        for j in range(len(emotions_list)):
-            # Initialize background based on colour
-            print(emotion_colour[emotions_list[j]])
-            colour = emotion_colour[emotions_list[j]]
-            self.text = tk.Text(self, bg=colour, width=30, height=10) #emotion_colour[emotions_list[j]])
-            self.text.grid(row=2, column=j, rowspan=1)
 
-            # Find emotion in list
-            label = Label(self.text, text=emotions_list[j],
-                            font=controller.title_font, bg=colour)
-            label.place(relx=0.35, rely=0.4)
-            labels.append(label)
-
-            # Display button with corresponding emotion
-            button = tk.Button(self.text, text="Define", command=lambda:self.change_current_emotion(
-                controller, j))
-            button.place(relx=(0.35), rely=0.6)
-        """
 
     def draw_rectangle(self, controller):
-        """ Draw Buttons and Widgets"""
+        """ Draw Buttons and Widgets """
         # ++++++ BUTTON 0 ++++++
         # Initialize background based on colour
         colour = emotion_colour[top_3_list[0]]
@@ -106,8 +87,8 @@ class EmotionsList(tk.Frame):
 
         # Find emotion in list
         label = Label(self.text, text=top_3_list[0],
-                        font=controller.title_font, bg=colour)
-        label.place(relx=0, rely=0.4)
+                        font=controller.title_font, bg=colour, anchor="w")
+        label.place(relx=0.35, rely=0.4)
         labels.append(label)
 
         # Display button with corresponding emotion
@@ -153,60 +134,24 @@ class EmotionsList(tk.Frame):
 
     def change_current_emotion0(self, controller):
         global emotion_text_label
-        clicked_on = top_3_list[0]
-        print(emotions_list)
-        # title_label[0].configure(text=top_3_list[0])
-        print ("updated clicked on 0")
-        print('clicked on', clicked_on)
         self.controller = controller
         controller.show_frame("DefinitionsPage")
         title_label[0].configure(text=top_3_list[0])
         emotion_text_label.configure(text=emotional_meaning[top_3_list[0]])
-        print('top 3 0', top_3_list)
 
     def change_current_emotion1(self, controller):
         global emotion_text_label
-        print (emotions_list)
-        clicked_on = top_3_list[1]
-        # title_label[0].configure(text=top_3_list[1])
-        print("updated clicked on 1")
-        print('clicked on', clicked_on)
         self.controller = controller
         controller.show_frame("DefinitionsPage")
         title_label[0].configure(text=top_3_list[1])
         emotion_text_label.configure(text=emotional_meaning[top_3_list[1]])
-        print('top 3 1', top_3_list)
 
     def change_current_emotion2(self, controller):
         global emotion_text_label
-        print(emotions_list)
-        clicked_on = top_3_list[2]
-        # title_label[0].configure(text=top_3_list[2])
-        print(title_label[0])
-        print("updated clicked on 2")
-        print('clicked on', clicked_on)
         self.controller = controller
         controller.show_frame("DefinitionsPage")
         title_label[0].configure(text=top_3_list[2])
         emotion_text_label.configure(text=emotional_meaning[top_3_list[2]])
-        print('top 3 2', top_3_list)
-
-    def change_current_colour(self, controller, num):
-        pass
-
-        # MAKING RECTANGLES
-
-
-"""
-        canvas_width = 80
-        canvas_height = 40
-        w = Canvas(master,
-                   width=canvas_width,
-                   height=canvas_height)
-        w.pack()
-        w.create_rectangle(0, 0, 50, 50, fill="blue")
-        mainloop()
-"""
 
 
 class DefinitionsPage(tk.Frame):
@@ -222,7 +167,6 @@ class DefinitionsPage(tk.Frame):
                                "EmotionsList"))
 
         # Display Definition
-        emotion = "contempt"
         emotion_def = emotional_meaning[clicked_on]
         label = tk.Label(self, text=emotion_def)
         global emotion_text_label
@@ -239,15 +183,11 @@ def facestuff():
     global top_ws_list
     emotions_list = emotion_threshold(screenshot(), thresh)
     top_3_list = top_3_emotions(emotion_threshold(emotions_list, thresh))
-    print('top 3', top_3_list)
     top_ws_list = top_3_widths(emotion_threshold(emotions_list, thresh), LABEL_WIDTH)
-    # print('top w', top_ws_list)
-    print(emotions_list, '\n' * 2)
     for i in range(len(labels)):
         colour = emotion_colour[top_3_list[i]]
         labels[i].configure(text=top_3_list[i], bg=colour, width=top_ws_list[i])
         texts[i].configure(bg=colour, width=top_ws_list[i])
-    # title_label[0].configure(text=top_3_list[0])
     app.after(4000, func=facestuff)
 
 if __name__ == "__main__":
