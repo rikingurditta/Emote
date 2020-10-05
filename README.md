@@ -1,9 +1,5 @@
 # Emote
-A user-friendly tool to support the emotional development of youth with autism. Made at UofTHacks VI by Nive, Rikin, Sarina, Shannon.
-
-## Inspiration
-
-Making friends and maintaining relationships can be hard. This challenge is further complicated if you are a youth living with autism. Autism spectrum disorder (ASD) is characterized by difficulties with social skills, speech, and nonverbal communication. People with autism often struggle to identify emotion and react appropriately. Such struggles can make it difficult to form friends, even though, like all youth, youth with autism yearn for connection. The obstacle these youth face in identifying emotion was our inspiration for this project. By facilitating emotive identification through technology, we hope to be able to support the widespread emotional development and well-being of youth with autism.
+A user-friendly tool to support emotional development. Made at UofTHacks VI by Nive, Rikin, Sarina, Shannon.
 
 ## What it does
 
@@ -19,7 +15,8 @@ Our biggest challenge was a result of using tkinter to format our screens. Speci
 
 ## Accomplishments that we're proud of
 
-Our biggest accomplishment was thinking of an ambitious product and developing it in 36 hours! Many of our team members had never created a product geared to a specific audience, so having to worry about the user interface and accessibility was new to us. Additionally, since our product is directed toward an audience with a disability that none of our group members have, we made sure to do thorough research in order to avoid misguided design errors. Overall, we are proud of the product that we developed and cannot wait to share it with youth with autism.
+Our biggest accomplishment was thinking of an ambitious product and developing it in 36 hours! Many of our team members had never created a product geared to a specific audience, so having to worry about the user interface and accessibility was new to us. Additionally, since our product is directed toward an audience with a disability that none of our group members have, we made sure to do thorough research in order to avoid misguided design errors. Overall, we are proud of the product that we developed and cannot wait to share it
+.
 
 ## What we learned
 
